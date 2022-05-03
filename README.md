@@ -3,7 +3,7 @@ Dowload series from dmax.de
 
 ## Setup
 
-    pip3 install https://github.com/dr1s/dmax_dl.py
+    pip3 install git+https://github.com/dr1s/dmax_dl.py
 
 ## Usage
 

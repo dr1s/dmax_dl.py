@@ -40,8 +40,13 @@ def main():
     elif args.season > 0 and args.episode > 0:
         if args.season in series.seasons:
             download_episode(args.output_dir, series, args.season, args.episode)
+        else:
+            print("Error: Season %i not found!" % args.season)
     elif args.season > 0 and args.episode == 0:
-        download_episode(args.output_dir, series, args.season)
+        if args.season in series.seasons:
+            download_episode(args.output_dir, series, args.season)
+        else:
+            print("Error: Season %i not found!" % args.season)
 
 
 

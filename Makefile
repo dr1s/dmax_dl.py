@@ -1,7 +1,7 @@
 build:
 	python3 setup.py sdist bdist_wheel --universal
 clean:
-	rm -rf build dist *.egg-info
+	rm -rf build dist *.egg-info */__pycache__
 env:
 	pipenv install
 upload:
