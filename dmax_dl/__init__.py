@@ -10,16 +10,16 @@ __AUTHOR__ = "dr1s"
 def main():
 
     parser = argparse.ArgumentParser(description="automatic dmax.de episode download")
-    parser.add_argument("-s", "--season", help="Season No.", default=0, type=int)
+    parser.add_argument("-s", "--season", help="season no.", default=0, type=int)
     parser.add_argument(
         "-e",
         "--episode",
-        help="Episode No. (Only works in combination with season filter)",
+        help="episode no. (only works in combination with season filter)",
         default=0,
         type=int,
     )
-    parser.add_argument("series_url", type=str, help="DMAX Series videos URL")
-    parser.add_argument("output_dir", type=str, help="Output dir")
+    parser.add_argument("series_url", type=str, help="DMAX series videos URL")
+    parser.add_argument("output_dir", type=str, help="output dir")
     parser.add_argument(
         "-f",
         "--format",
