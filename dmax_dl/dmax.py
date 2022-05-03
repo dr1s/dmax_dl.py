@@ -15,8 +15,8 @@ class episode:
         if not os.path.exists(dest):
             os.mkdir(dest)
 
-        filename = "S%iE%i - %s" % (self.season, self.episode, self.title)
-        output_dir = os.path.join(dest, "Season %i" % self.season)
+        filename = "S%02dE%02d - %s" % (self.season, self.episode, self.title)
+        output_dir = os.path.join(dest, "Season %02d" % self.season)
 
         if not os.path.exists(output_dir):
             os.mkdir(output_dir)
