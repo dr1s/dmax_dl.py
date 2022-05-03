@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-
-import sys
 import dmax_dl.dmax
-import argparse
 
 
 class YTDLLogger:
@@ -16,40 +13,33 @@ class YTDLLogger:
         print(msg)
 
 
-def download_episode(folder, series, season_no, episode_no=None):
-    episodes = series.seasons[season_no].episodes
-    for e in range(0, len(episodes)):
-        ep = episodes[e]
-        print("S%iE%i - %s: %s" % (ep.season, ep.episode, ep.title, ep.url))
-        if ep.episode == episode_no or episode_no == None:
-            ep.download(folder)
+class dlmgr:
+    def __init__(self, series_url, output_dir):
+        self.url = series_url
+        self.series = dmax_dl.dmax.series(series_url)
+        self.output_dir = output_dir
 
+    def download_episodes(self, season_no, episode_no=None):
+        episodes = self.series.seasons[season_no].episodes
+        for e in range(0, len(episodes)):
+            ep = episodes[e]
+            print("S%iE%i - %s: %s" % (ep.season, ep.episode, ep.title, ep.url))
+            if ep.episode == episode_no or episode_no == None:
+                ep.download(self.output_dir)
 
-def main():
+    def process(self, season=0, episode=0):
 
-    parser = argparse.ArgumentParser(description="automatic dmax.de episode download")
-    parser.add_argument("-s", "--season", help="Season No.", default=0, type=int)
-    parser.add_argument("-e", "--episode", help="Episode No.", default=0, type=int)
-    parser.add_argument("series_url", type=str, help="DMAX Series videos URL")
-    parser.add_argument("output_dir", type=str, help="Output dir")
-    args = parser.parse_args()
-
-    series = dmax_dl.dmax.series(args.series_url)
-
-    if args.season == 0 and args.episode == 0:
-        for s in range(1, len(series.seasons)):
-            download_episode(args.output_dir, series, s)
-    elif args.season > 0 and args.episode > 0:
-        if args.season in series.seasons:
-            download_episode(args.output_dir, series, args.season, args.episode)
-        else:
-            print("Error: Season %i not found!" % args.season)
-    elif args.season > 0 and args.episode == 0:
-        if args.season in series.seasons:
-            download_episode(args.output_dir, series, args.season)
-        else:
-            print("Error: Season %i not found!" % args.season)
-
-
-if __name__ == "__main__":
-    main()
+        if season == 0 and episode == 0:
+            for s in range(1, int(sorted(self.series.seasons.keys())[-1]) + 1):
+                if s in self.series.seasons.keys():
+                    self.download_episodes(s)
+        elif season > 0 and episode > 0:
+            if season in self.series.seasons:
+                self.download_episodes(season, episode)
+            else:
+                print("Error: Season %i not found!" % season)
+        elif season > 0 and episode == 0:
+            if season in self.series.seasons:
+                self.download_episodes(season)
+            else:
+                print("Error: Season %i not found!" % season)
