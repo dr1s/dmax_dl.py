@@ -1,0 +1,4 @@
+mechanize>=0.4.8
+lxml>=4.8.0
+beautifulsoup4>=4.11.1
+youtube-dl>=2021.12.17
