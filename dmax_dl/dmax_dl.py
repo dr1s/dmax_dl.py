@@ -32,7 +32,7 @@ def main():
     parser.add_argument("output_dir", type=str, help="Output dir")
     args = parser.parse_args()
 
-    series = dmax.series(args.series_url)
+    series = dmax_dl.dmax.series(args.series_url)
 
     if args.season == 0 and args.episode == 0:
         for s in range(1, len(series.seasons)):
