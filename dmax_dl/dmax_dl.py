@@ -4,6 +4,7 @@ import sys
 import dmax_dl.dmax
 import argparse
 
+
 class YTDLLogger:
     def debug(self, msg):
         pass
@@ -22,6 +23,7 @@ def download_episode(folder, series, season_no, episode_no=None):
         print("S%iE%i - %s: %s" % (ep.season, ep.episode, ep.title, ep.url))
         if ep.episode == episode_no or episode_no == None:
             ep.download(folder)
+
 
 def main():
 
@@ -47,7 +49,6 @@ def main():
             download_episode(args.output_dir, series, args.season)
         else:
             print("Error: Season %i not found!" % args.season)
-
 
 
 if __name__ == "__main__":

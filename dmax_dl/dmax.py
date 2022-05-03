@@ -3,6 +3,7 @@ import mechanize
 import youtube_dl
 from bs4 import BeautifulSoup
 
+
 class episode:
     def __init__(self, episode, season, title, url):
         self.episode = episode
