@@ -1,5 +1,6 @@
 import argparse
-from dmax_dl.dmax_dl import dlmgr
+from dmax_dl.dl import mgr
+from dmax_dl.dmax import series
 
 __NAME__ = "dmax_dl"
 __VERSION__ = "0.1.dev0"
@@ -19,10 +20,18 @@ def main():
     )
     parser.add_argument("series_url", type=str, help="DMAX Series videos URL")
     parser.add_argument("output_dir", type=str, help="Output dir")
+    parser.add_argument(
+        "-f",
+        "--format",
+        type=str,
+        help="youtube-dl audio/video format string",
+        default="bestvideo[height<=1080]+bestaudio/best[height<=1080]",
+    )
     args = parser.parse_args()
 
-    mgr = dlmgr(args.series_url, args.output_dir)
-    mgr.process(args.season, args.episode)
+    s = series(args.series_url)
+    dlmgr = mgr(s, args.output_dir, args.format)
+    dlmgr.process(args.season, args.episode)
 
 
 if __name__ == "__main__":

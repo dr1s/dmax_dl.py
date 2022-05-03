@@ -1,6 +1,4 @@
-import os
 import mechanize
-import youtube_dl
 from bs4 import BeautifulSoup
 
 
@@ -10,26 +8,6 @@ class episode:
         self.season = season
         self.title = title
         self.url = url
-
-    def download(self, dest):
-
-        if not os.path.exists(dest):
-            os.mkdir(dest)
-
-        filename = "S%02dE%02d - %s" % (self.season, self.episode, self.title)
-        output_dir = os.path.join(dest, "Season %02d" % self.season)
-
-        if not os.path.exists(output_dir):
-            os.mkdir(output_dir)
-
-        output_file = os.path.join(output_dir, filename)
-
-        ytdl_opts = {
-            "outtmpl": output_file + ".%(ext)s",
-        }
-
-        with youtube_dl.YoutubeDL(ytdl_opts) as ydl:
-            ydl.download([self.url])
 
 
 class season:
@@ -50,7 +28,7 @@ class series:
     def __init__(self, url):
         self.seasons = {}
         self.url = url
-        dmax = scraper()
+        self.dmax = scraper()
         self.add(dmax.parse(url))
 
     def add(self, episodes=None):
