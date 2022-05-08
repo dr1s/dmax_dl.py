@@ -25,11 +25,9 @@ class season:
 
 
 class series:
-    def __init__(self, url):
+    def __init__(self, url, episodes=None):
         self.seasons = {}
         self.url = url
-        self.dmax = scraper()
-        self.add(dmax.parse(url))
 
     def add(self, episodes=None):
         for e in episodes:
@@ -49,8 +47,6 @@ class scraper:
             )
         ]
         self.br.addheaders = user_agent
-
-        self.episodes = []
 
     def parse(self, url):
         page = self.br.open(url)
@@ -82,5 +78,4 @@ class scraper:
                         )
                         episodes.append(episode_tmp)
 
-        self.episodes = episodes
         return episodes

@@ -1,6 +1,6 @@
 import argparse
 from dmax_dl.dl import mgr
-from dmax_dl.dmax import series
+from dmax_dl.dmax import series, scraper
 
 __NAME__ = "dmax_dl"
 __VERSION__ = "0.1.dev0"
@@ -29,7 +29,9 @@ def main():
     )
     args = parser.parse_args()
 
+    episodes = scraper().parse(url)
     s = series(args.series_url)
+    s.add(dmax.parse(url))
     dlmgr = mgr(s, args.output_dir, args.format)
     dlmgr.process(args.season, args.episode)
 
