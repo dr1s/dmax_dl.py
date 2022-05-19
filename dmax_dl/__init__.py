@@ -31,7 +31,7 @@ def main():
 
     episodes = scraper().parse(url)
     s = series(args.series_url)
-    s.add(dmax.parse(url))
+    s.add(episodes)
     dlmgr = mgr(s, args.output_dir, args.format)
     dlmgr.process(args.season, args.episode)
 
