@@ -29,7 +29,7 @@ def main():
     )
     args = parser.parse_args()
 
-    episodes = scraper().parse(url)
+    episodes = scraper().parse(args.series_url)
     s = series(args.series_url)
     s.add(episodes)
     dlmgr = mgr(s, args.output_dir, args.format)
